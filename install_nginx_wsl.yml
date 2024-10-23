@@ -1,0 +1,26 @@
+---
+- name: Install and start NGINX on WSL
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start NGINX using service
+      command: service nginx start
+
+    - name: Ensure NGINX is running
+      command: service nginx status
+      register: nginx_status
+      changed_when: false
+      failed_when: "'running' not in nginx_status.stdout"
+
+    - name: Enable NGINX at startup (custom for WSL)
+      copy:
+        content: |
+          #!/bin/bash
+          sudo service nginx start
+        dest: /etc/init.d/nginx_autostart
+        mode: '0755'
