@@ -1,36 +1,36 @@
 ### Install Ansible
-`` bash
+``` bash
 sudo apt update
 sudo apt install ansible -y
-``
+```
 
 ### Install NGINX
-`` bash
+``` bash
 sudo apt install nginx -y
-``
+```
 
 ### Write install_nginx_wsl.yml
 
-`` bash
+``` bash
 nano install_nginx_wsl.yml
-``
+```
 
 ### Run the Playbook
-`` bash
+``` bash
 ansible-playbook install_nginx_wsl.yml
-``
+```
 
 ### Starting NGINX After Reboot
-`` bash
+``` bash
 sudo bash /etc/init.d/nginx_autostart
-``
+```
 
 ### Find WSL's IP Address
-`` bash
+``` bash
 ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1
-``
+```
 
 ### Access NGINX in Your Browser, Example:
-`` bash
+``` bash
 http://172.30.240.1
-``
+```
